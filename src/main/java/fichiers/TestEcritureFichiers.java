@@ -6,13 +6,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class TestEcritureFichiers {
     public static void main(String[] args) {
-        Path pathOrigine = Paths.get("C:/Temp/recensement.csv");
-        Path pathDestination = Paths.get("C:/Temp/recensement-23102024.csv");
+
+        // La classe Paths fonctionne avec la notion de propriété système user.dir qu'on peut positionner
+        // Pour positionner cette propriété il faut lancer l'application avec le paramètre suivant :
+        // -Duser.dir="C:\Temp\" par exemple.
+        // Le problème est qu'IntelliJ force ce répertoire avec le chemin du projet.
+        System.out.println(System.getProperty("user.dir"));
+
+        Path pathOrigine = Paths.get("recensement.csv");
+        Path pathDestination = Paths.get("C:/Temp/recensement-24102024.csv");
         try {
             List<Commune> listeCommunes = new ArrayList<>();
 
@@ -21,8 +29,6 @@ public class TestEcritureFichiers {
             String ligneEntete = listeLignes.removeFirst();
 
             for (String ligne : listeLignes) {
-                System.out.println(ligne);
-
                 // découper la ligne selon le caractère ;
                 String[] elements = ligne.split(";");
                 String nomRegion = elements[1];
@@ -33,6 +39,7 @@ public class TestEcritureFichiers {
                 Commune commune  = new Commune(nomCommune, codeDept, nomRegion, population);
                 listeCommunes.add(commune);
             }
+            Collections.sort(listeCommunes);
 
             // Préparer mon fichier de sortie
 

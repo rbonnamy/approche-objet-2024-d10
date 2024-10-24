@@ -2,7 +2,7 @@ package fichiers;
 
 import java.util.Objects;
 
-public class Commune {
+public class Commune implements Comparable<Commune> {
 
     private String nom;
     private String codeDept;
@@ -14,6 +14,17 @@ public class Commune {
         this.codeDept = codeDept;
         this.nomRegion = nomRegion;
         this.population = population;
+    }
+
+    @Override
+    public int compareTo(Commune autre) {
+        if (this.getPopulation() > autre.getPopulation()){
+            return 1;
+        }
+        else if (this.getPopulation() < autre.getPopulation()){
+            return -1;
+        }
+        return this.nom.toLowerCase().compareTo(autre.getNom().toLowerCase());
     }
 
     @Override

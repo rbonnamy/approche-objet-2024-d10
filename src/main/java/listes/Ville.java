@@ -2,13 +2,29 @@ package listes;
 
 import java.util.Objects;
 
-public class Ville {
+/**
+ * Ville représente un concept métier.
+ * On n'a pas le droit en POO de polluer des concepts métier avec des attributs techniques
+ */
+public class Ville implements Comparable<Ville> {
+
     private String nom;
     private int nbHabs;
 
     public Ville(String nom, int nbHabs) {
         this.nom = nom;
         this.nbHabs = nbHabs;
+    }
+
+    @Override
+    public int compareTo(Ville autre) {
+        if (this.getNbHabs() > autre.getNbHabs()){
+            return 1;
+        }
+        else if (this.getNbHabs() < autre.getNbHabs()){
+            return -1;
+        }
+        return this.nom.toLowerCase().compareTo(autre.getNom().toLowerCase());
     }
 
     @Override
@@ -53,4 +69,5 @@ public class Ville {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
 }

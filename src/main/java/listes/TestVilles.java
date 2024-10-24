@@ -8,6 +8,7 @@ public class TestVilles {
         ArrayList<Ville> listeVilles = new ArrayList<>();
         Ville foix = new Ville("Foix", 9700);
         Collections.addAll(listeVilles, new Ville("Nice", 343000), new Ville("Carcassonne", 47800), new Ville("Narbonne", 53400), new Ville("Lyon", 484000), foix, new Ville("Pau", 77200), new Ville("Marseille", 850700), new Ville("Tarbes", 40600));
+        Collections.sort(listeVilles, new VilleComparator(VilleComparator.TRI_POPULATION)); // 0 est un nb magique : que représente t'il ?
 
         Ville villeRechechee = new Ville("Foix", 9700);
 
