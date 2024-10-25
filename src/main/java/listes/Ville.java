@@ -1,5 +1,9 @@
 package listes;
 
+import annotations.ToString;
+import fr.diginamic.testenumeration.Continent;
+import utils.StringUtils;
+
 import java.util.Objects;
 
 /**
@@ -8,12 +12,22 @@ import java.util.Objects;
  */
 public class Ville implements Comparable<Ville> {
 
+    @ToString(upperCase = true, separateur = " ; ")
     private String nom;
+    @ToString
     private int nbHabs;
+    private Continent continent;
 
     public Ville(String nom, int nbHabs) {
         this.nom = nom;
         this.nbHabs = nbHabs;
+        this.continent = Continent.NON_DEFINI;
+    }
+
+    public Ville(String nom, int nbHabs, Continent continent) {
+        this.nom = nom;
+        this.nbHabs = nbHabs;
+        this.continent = continent;
     }
 
     @Override
@@ -29,10 +43,7 @@ public class Ville implements Comparable<Ville> {
 
     @Override
     public String toString() {
-        return "Ville{" +
-                "nbHabs=" + nbHabs +
-                ", nom='" + nom + '\'' +
-                '}';
+        return StringUtils.toString(this);
     }
 
     /**
@@ -70,4 +81,11 @@ public class Ville implements Comparable<Ville> {
         this.nom = nom;
     }
 
+    public Continent getContinent() {
+        return continent;
+    }
+
+    public void setContinent(Continent continent) {
+        this.continent = continent;
+    }
 }

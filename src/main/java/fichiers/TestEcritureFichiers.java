@@ -1,5 +1,7 @@
 package fichiers;
 
+import annotations.CsvUtils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +21,7 @@ public class TestEcritureFichiers {
         // Le problème est qu'IntelliJ force ce répertoire avec le chemin du projet.
         System.out.println(System.getProperty("user.dir"));
 
-        Path pathOrigine = Paths.get("recensement.csv");
+        Path pathOrigine = Paths.get("src/main/resources/recensement.csv");
         Path pathDestination = Paths.get("C:/Temp/recensement-24102024.csv");
         try {
             List<Commune> listeCommunes = new ArrayList<>();
@@ -51,7 +53,7 @@ public class TestEcritureFichiers {
             lignesDestination.add("Nom de la région;code département;Nom de la commune;Population totale");
             for (Commune commune : listeCommunes){
                 if (commune.getPopulation()>nbHabs){
-                    String communeStr = commune.getNomRegion()+";"+commune.getCodeDept()+";"+commune.getNom()+";"+commune.getPopulation();
+                    String communeStr = CsvUtils.toCsv(commune);
                     lignesDestination.add(communeStr);
                 }
             }

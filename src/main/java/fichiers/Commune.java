@@ -1,12 +1,27 @@
 package fichiers;
 
+import annotations.ToCsv;
+import annotations.ToString;
+import utils.StringUtils;
+
+import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class Commune implements Comparable<Commune> {
 
+    @ToString(separateur = " - ", upperCase = true)
+    @ToCsv(upperCase = true, ordre=3)
     private String nom;
+
+    @ToCsv(ordre=2)
     private String codeDept;
+
+    @ToString(separateur = " => ")
+    @ToCsv(ordre=1)
     private String nomRegion;
+
+    @ToString
+    @ToCsv(ordre=4)
     private int population;
 
     public Commune(String nom, String codeDept, String nomRegion, int population) {
@@ -29,12 +44,7 @@ public class Commune implements Comparable<Commune> {
 
     @Override
     public String toString() {
-        return "Commune{" +
-                "codeDept='" + codeDept + '\'' +
-                ", nom='" + nom + '\'' +
-                ", nomRegion='" + nomRegion + '\'' +
-                ", population=" + population +
-                '}';
+        return StringUtils.toString(this);
     }
 
     @Override
