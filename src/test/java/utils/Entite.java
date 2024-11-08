@@ -1,30 +1,23 @@
-package fichiers;
+package utils;
 
-import annotations.ToCsv;
 import annotations.ToString;
-import utils.StringUtils;
 
-import java.lang.reflect.Field;
 import java.util.Objects;
 
-public class Commune implements Comparable<Commune> {
+public class Entite implements Comparable<Entite> {
 
-    @ToString(separateur = " - ", upperCase = true)
-    @ToCsv(upperCase = true, ordre=3)
+    @ToString(separateur = " : ", upperCase = true)
     private String nom;
 
-    @ToCsv(ordre=2)
     private String codeDept;
 
     @ToString(separateur = " => ")
-    @ToCsv(ordre=1)
     private String nomRegion;
 
     @ToString
-    @ToCsv(ordre=4)
     private int population;
 
-    public Commune(String nom, String codeDept, String nomRegion, int population) {
+    public Entite(String nom, String codeDept, String nomRegion, int population) {
         this.nom = nom;
         this.codeDept = codeDept;
         this.nomRegion = nomRegion;
@@ -32,7 +25,7 @@ public class Commune implements Comparable<Commune> {
     }
 
     @Override
-    public int compareTo(Commune autre) {
+    public int compareTo(Entite autre) {
         if (this.getPopulation() > autre.getPopulation()){
             return 1;
         }
@@ -49,7 +42,7 @@ public class Commune implements Comparable<Commune> {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Commune commune)) {
+        if (!(o instanceof Entite commune)) {
             return false;
         }
         return population == commune.population && Objects.equals(nom, commune.nom) && Objects.equals(codeDept, commune.codeDept) && Objects.equals(nomRegion, commune.nomRegion);

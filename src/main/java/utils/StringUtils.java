@@ -27,17 +27,15 @@ public final class StringUtils {
         for (Field attributInstance: tableauAttributsInstance){
 
             if (attributInstance.isAnnotationPresent(ToString.class)){
+                attributInstance.setAccessible(true);
                 try {
                     ToString annotationAttribut = attributInstance.getAnnotation(ToString.class);
-
-                    attributInstance.setAccessible(true);
-
                     Object valeurAttributInstance = attributInstance.get(obj);
-                    if (valeurAttributInstance!=null && annotationAttribut.upperCase()){
-                        builder.append(valeurAttributInstance.toString().toUpperCase()).append(annotationAttribut.separateur());
+                    if (valeurAttributInstance!=null && annotationAttribut.upperCase()) {
+                        builder.append(valeurAttributInstance.toString().toUpperCase());
                     }
                     else {
-                        builder.append(valeurAttributInstance).append(annotationAttribut.separateur());
+                        builder.append(annotationAttribut.separateur());
                     }
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);

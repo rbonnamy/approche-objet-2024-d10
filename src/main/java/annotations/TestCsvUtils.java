@@ -1,6 +1,6 @@
 package annotations;
 
-import fichiers.Commune;
+import fichiers.java.nio.Commune;
 
 public class TestCsvUtils {
     public static void main(String[] args) {
